@@ -39,8 +39,10 @@ def fetch_inspire_records():
 
 def get_title(metadata):
     titles = metadata.get("titles", [])
+
     if titles:
         return titles[0].get("title", "Untitled")
+
     return "Untitled"
 
 
@@ -69,7 +71,6 @@ def get_journal(metadata):
         journal = item.get("journal_title")
         volume = item.get("journal_volume")
         page = item.get("page_start")
-        year = item.get("year")
 
         parts = []
 
@@ -93,14 +94,52 @@ def get_journal(metadata):
     return "Preprint"
 
 
+def format_author_name(name):
+    """
+    Convert INSPIRE-style names from 'Surname, Firstname Middlename'
+    to 'F. M. Surname'.
+
+    Examples:
+    'Iannotti, Daniele' -> 'D. Iannotti'
+    'Campos Venuti, Lorenzo' -> 'L. Campos Venuti'
+    'Odavić, Jasmin' -> 'J. Odavić'
+    """
+
+    if "," not in name:
+        return name
+
+    parts = [part.strip() for part in name.split(",", 1)]
+
+    if len(parts) != 2:
+        return name
+
+    surname, first_names = parts
+
+    if not surname or not first_names:
+        return name
+
+    initials = " ".join(
+        f"{part[0]}."
+        for part in first_names.replace("-", " ").split()
+        if part
+    )
+
+    if not initials:
+        return name
+
+    return f"{initials} {surname}"
+
+
 def get_authors(metadata, max_authors=8):
     authors = metadata.get("authors", [])
 
     names = []
+
     for author in authors[:max_authors]:
         name = author.get("full_name")
+
         if name:
-            names.append(name)
+            names.append(format_author_name(name))
 
     if not names:
         return "Authors unavailable"
