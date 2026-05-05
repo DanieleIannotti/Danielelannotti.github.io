@@ -6,7 +6,7 @@
 
   <title>Daniele Iannotti | Theoretical Physics</title>
 
-  <meta name="description" content="Daniele Iannotti is a PhD student in theoretical physics working on quantum information, quantum many-body physics, and quantum gravity.">
+  <meta name="description" content="Daniele Iannotti is a PhD student in theoretical physics working on quantum information, quantum many-body physics and quantum gravity.">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -23,6 +23,7 @@
         <a href="#publications">Publications</a>
         <a href="#journey">Journey</a>
         <a href="#outreach">Outreach</a>
+        <a href="#outside">Outside Academia</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
@@ -31,33 +32,33 @@
   <main id="home">
 
     <section class="hero">
-  <div class="hero-text">
-    <p class="label">Theoretical Physics · Quantum Information </p>
+      <div class="hero-text">
+        <p class="label">Theoretical Physics · Quantum Information</p>
 
-    <h1>Daniele Iannotti</h1>
+        <h1>Daniele Iannotti</h1>
 
-    <p class="subtitle">
-      PhD student working at the interface of quantum information theory,
-      quantum many-body physics, and quantum gravity.
-    </p>
+        <p class="subtitle">
+          PhD student working at the interface of quantum information theory,
+          quantum many-body physics, and quantum gravity.
+        </p>
 
-    <p>
-      Scuola Superiore Meridionale, Naples · Universität zu Köln, visiting
-    </p>
+        <p>
+          Scuola Superiore Meridionale, Naples · Universität zu Köln, visiting
+        </p>
 
-    <div class="buttons">
-      <a href="assets/cv.pdf">CV</a>
-      <a href="mailto:d.iannotti@ssmeridionale.it">Email</a>
-      <a href="https://scholar.google.com/citations?user=SbR9_rMAAAAJ&hl=en">Google Scholar</a>
-      <a href="https://inspirehep.net/authors/2680286?ui-citation-summary=true">INSPIRE-HEP</a>
-      <a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Iannotti,+D">arXiv</a>
-    </div>
-  </div>
+        <div class="buttons">
+          <a href="assets/cv.pdf">CV</a>
+          <a href="mailto:d.iannotti@ssmeridionale.it">Email</a>
+          <a href="https://scholar.google.com/citations?user=SbR9_rMAAAAJ&hl=en">Google Scholar</a>
+          <a href="https://inspirehep.net/authors/2680286?ui-citation-summary=true">INSPIRE-HEP</a>
+          <a href="https://arxiv.org/search/quant-ph?searchtype=author&query=Iannotti,+D">arXiv</a>
+        </div>
+      </div>
 
-  <div class="hero-photo">
-    <img src="assets/profile.jpeg" alt="Portrait of Daniele Iannotti">
-  </div>
-</section>
+      <div class="hero-photo">
+        <img src="assets/profile.jpeg" alt="Portrait of Daniele Iannotti">
+      </div>
+    </section>
 
     <section id="about">
       <h2>About</h2>
@@ -84,8 +85,8 @@
         <article>
           <h3>Quantum resources</h3>
           <p>
-            Entanglement, magic and their role 
-            in many-body quantum systems.
+            Entanglement, magic, stabilizer entropy, non-stabilizerness, and
+            their role in many-body quantum systems.
           </p>
         </article>
 
@@ -108,17 +109,17 @@
     </section>
 
     <section id="publications">
-  <h2>Publications</h2>
+      <h2>Publications</h2>
 
-  <p>
-    Publications are loaded automatically from
-    <a href="https://inspirehep.net/authors/2680286?ui-citation-summary=true">INSPIRE-HEP</a>.
-  </p>
+      <p>
+        A complete publication record is available on
+        <a href="https://inspirehep.net/authors/2680286?ui-citation-summary=true">INSPIRE-HEP</a>.
+      </p>
 
-  <div id="publications-list">
-    <p>Loading publications from INSPIRE-HEP...</p>
-  </div>
-</section>
+      <div id="publications-list">
+        <p>Loading publications...</p>
+      </div>
+    </section>
 
     <section id="journey">
       <h2>Academic Journey</h2>
@@ -127,9 +128,11 @@
         <li>
           <strong>2020</strong> — BSc in Physics, La Sapienza University of Rome
         </li>
+
         <li>
           <strong>2022</strong> — MSc in Theoretical Physics, University of Trieste
         </li>
+
         <li>
           <strong>PhD</strong> — Scuola Superiore Meridionale & Universität zu Köln
         </li>
@@ -164,96 +167,71 @@
       </p>
 
       <p>
-        Email: <a href="mailto:d.iannotti@ssmeridionale.it">d.iannotti@ssmeridionale.it</a>
+        Email:
+        <a href="mailto:d.iannotti@ssmeridionale.it">d.iannotti@ssmeridionale.it</a>
       </p>
     </section>
 
   </main>
 
-    <footer>
+  <footer>
     <p>© 2026 Daniele Iannotti</p>
   </footer>
 
   <script>
     async function loadPublications() {
-      const publicationsList = document.getElementById("publications-list");
-
-      const url =
-        "https://inspirehep.net/api/literature?q=a%20D.Iannotti.1&sort=mostrecent&size=20";
+      const list = document.getElementById("publications-list");
 
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await fetch("publications.json");
 
-        const papers = data.hits.hits;
+        if (!response.ok) {
+          throw new Error("Could not load publications.json");
+        }
 
-        if (!papers || papers.length === 0) {
-          publicationsList.innerHTML = "<p>No publications found.</p>";
+        const publications = await response.json();
+
+        if (!publications || publications.length === 0) {
+          list.innerHTML = "<p>No publications found.</p>";
           return;
         }
 
-        publicationsList.innerHTML = "";
+        list.innerHTML = "";
 
-        papers.forEach((paper) => {
-          const metadata = paper.metadata;
-
-          const title = metadata.titles?.[0]?.title || "Untitled";
-          const year =
-            metadata.publication_info?.[0]?.year ||
-            metadata.preprint_date?.slice(0, 4) ||
-            "Year unknown";
-
-          const authors = metadata.authors
-            ?.slice(0, 8)
-            .map((author) => author.full_name)
-            .join(", ");
-
-          const authorText =
-            metadata.authors && metadata.authors.length > 8
-              ? authors + ", et al."
-              : authors || "Authors unavailable";
-
-          const recordUrl =
-            paper.links?.html ||
-            "https://inspirehep.net/literature/" + paper.id;
-
-          const arxiv =
-            metadata.arxiv_eprints?.[0]?.value
-              ? "https://arxiv.org/abs/" + metadata.arxiv_eprints[0].value
-              : null;
-
-          const journal =
-            metadata.publication_info?.[0]?.journal_title
-              ? metadata.publication_info[0].journal_title
-              : null;
-
-          const citations =
-            metadata.citation_count !== undefined
-              ? metadata.citation_count
-              : null;
-
+        publications.forEach((paper) => {
           const article = document.createElement("article");
           article.className = "publication";
 
+          const links = [];
+
+          if (paper.inspire) {
+            links.push(`<a href="${paper.inspire}">INSPIRE</a>`);
+          }
+
+          if (paper.arxiv) {
+            links.push(`<a href="${paper.arxiv}">arXiv</a>`);
+          }
+
+          if (paper.doi) {
+            links.push(`<a href="${paper.doi}">DOI</a>`);
+          }
+
           article.innerHTML = `
-            <h4>${title}</h4>
-            <p>${authorText}</p>
-            <p>
-              ${year}
-              ${journal ? " · " + journal : ""}
-              ${citations !== null ? " · Citations: " + citations : ""}
-            </p>
-            <p>
-              <a href="${recordUrl}">INSPIRE</a>
-              ${arxiv ? ` · <a href="${arxiv}">arXiv</a>` : ""}
-            </p>
+            <h4>${paper.title}</h4>
+            <p>${paper.authors}</p>
+            <p>${paper.year}${paper.journal ? " · " + paper.journal : ""}</p>
+            <p>${links.join(" · ")}</p>
           `;
 
-          publicationsList.appendChild(article);
+          list.appendChild(article);
         });
       } catch (error) {
-        publicationsList.innerHTML =
-          "<p>Could not load publications automatically. Please visit my INSPIRE-HEP profile instead.</p>";
+        list.innerHTML = `
+          <p>
+            Could not load publications automatically. Please visit my
+            <a href="https://inspirehep.net/authors/2680286?ui-citation-summary=true">INSPIRE-HEP profile</a>.
+          </p>
+        `;
       }
     }
 
