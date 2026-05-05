@@ -147,4 +147,13 @@ footer {
   .cards {
     grid-template-columns: 1fr;
   }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-photo img {
+    max-width: 180px;
+    margin-left: 0;
+  }
 }
