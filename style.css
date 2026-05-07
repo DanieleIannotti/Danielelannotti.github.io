@@ -311,95 +311,121 @@ section > p {
   margin-bottom: 56px;
 }
 
-.journey-duration {
+.timeline {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  row-gap: 60px;
-  padding-top: 16px;
+  padding-top: 8px;
 }
 
-.journey-duration::before {
-  content: "";
+.timeline-years {
+  position: relative;
+  height: 42px;
+  margin: 0 20px 8px;
+}
+
+.timeline-years span {
   position: absolute;
-  top: 55px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: rgba(243, 239, 230, 0.18);
-}
-
-.journey-period {
-  position: relative;
-  min-width: 0;
-}
-
-.journey-period.bachelor {
-  grid-column: 1 / span 3;
-}
-
-.journey-period.master {
-  grid-column: 4 / span 2;
-}
-
-.journey-period.phd {
-  grid-column: 6 / span 5;
-}
-
-.journey-period.visiting {
-  grid-column: 8 / span 3;
-  margin-top: 44px;
-}
-
-.period-years {
-  display: flex;
-  justify-content: space-between;
+  transform: translateX(-50%);
   color: var(--muted);
   font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 16px;
+  white-space: nowrap;
 }
 
-.period-line {
+.timeline-years span:first-child {
+  transform: translateX(0);
+}
+
+.timeline-years span:last-child {
+  transform: translateX(-100%);
+}
+
+.timeline-axis {
   position: relative;
-  height: 3px;
-  background: var(--accent);
-  border-radius: 999px;
-  margin-bottom: 34px;
+  height: 36px;
+  margin: 0 20px 52px;
 }
 
-.period-line::before,
-.period-line::after {
+.timeline-axis::before {
   content: "";
   position: absolute;
-  top: 50%;
-  width: 13px;
-  height: 13px;
-  transform: translateY(-50%);
+  top: 16px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.timeline-axis::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: -2px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid var(--accent);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 8px;
+  width: 20px;
+  height: 20px;
+  transform: translateX(-50%);
   border-radius: 999px;
   background: var(--bg);
-  border: 3px solid var(--accent);
-  box-shadow: 0 0 0 1px rgba(215, 255, 111, 0.35);
+  border: 4px solid var(--accent);
+  z-index: 2;
 }
 
-.period-line::before {
-  left: 0;
+.timeline-dot:first-child {
+  transform: translateX(0);
 }
 
-.period-line::after {
-  right: 0;
+.timeline-dot:last-child {
+  transform: translateX(-100%);
 }
 
-.period-logo {
-  width: 118px;
-  height: 118px;
-  margin: 0 auto 22px;
+.timeline-cards {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.timeline-card {
+  text-align: center;
+  min-width: 0;
+}
+
+.timeline-card.bachelor {
+  grid-column: 1 / span 3;
+}
+
+.timeline-card.master {
+  grid-column: 4 / span 2;
+}
+
+.timeline-card.phd {
+  grid-column: 7 / span 3;
+}
+
+.timeline-card.visiting {
+  grid-column: 10 / span 3;
+}
+
+.timeline-logo {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.period-logo img {
+.timeline-logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -407,22 +433,26 @@ section > p {
   opacity: 0.82;
 }
 
-.journey-period h3 {
-  max-width: 260px;
-  margin: 0 auto 10px;
+.timeline-card h3 {
+  max-width: 230px;
+  margin: 0 auto 8px;
   color: var(--muted);
-  text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   line-height: 1.25;
 }
 
-.journey-period p {
-  max-width: 260px;
-  margin: 0 auto;
+.timeline-card p {
+  max-width: 230px;
+  margin: 0 auto 8px;
   color: var(--text);
-  text-align: center;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.35;
+}
+
+.timeline-card small {
+  display: block;
+  color: var(--accent);
+  font-size: 0.9rem;
 }
 
 footer {
@@ -472,74 +502,54 @@ footer {
     margin-bottom: 32px;
   }
 
-  .journey-duration {
-    display: block;
-    padding-left: 28px;
-  }
-
-  .journey-duration::before {
-    top: 0;
-    bottom: 0;
-    left: 6px;
-    right: auto;
-    width: 3px;
-    height: auto;
-    background: var(--accent);
-  }
-
-  .journey-period,
-  .journey-period.bachelor,
-  .journey-period.master,
-  .journey-period.phd,
-  .journey-period.visiting {
-    display: grid;
-    grid-template-columns: 86px minmax(0, 1fr);
-    column-gap: 18px;
-    margin: 0 0 42px;
-  }
-
-  .period-years {
-    grid-column: 2;
-    grid-row: 1;
-    font-size: 1rem;
-    margin: 0 0 8px;
-    justify-content: flex-start;
-    gap: 10px;
-  }
-
-  .period-years span:first-child::after {
-    content: "–";
-    margin-left: 10px;
-    color: var(--accent);
-  }
-
-  .period-line {
+  .timeline-years,
+  .timeline-axis {
     display: none;
   }
 
-  .period-logo {
+  .timeline-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .timeline-card,
+  .timeline-card.bachelor,
+  .timeline-card.master,
+  .timeline-card.phd,
+  .timeline-card.visiting {
+    grid-column: auto;
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr);
+    column-gap: 18px;
+    text-align: left;
+    align-items: center;
+  }
+
+  .timeline-logo {
     grid-column: 1;
-    grid-row: 1 / span 3;
-    width: 68px;
-    height: 68px;
+    grid-row: 1 / span 4;
+    width: 64px;
+    height: 64px;
     margin: 0;
   }
 
-  .journey-period h3 {
+  .timeline-card h3 {
     grid-column: 2;
-    grid-row: 2;
     max-width: none;
     margin: 0 0 4px;
-    text-align: left;
     font-size: 1rem;
   }
 
-  .journey-period p {
+  .timeline-card p {
     grid-column: 2;
-    grid-row: 3;
     max-width: none;
-    margin: 0;
-    text-align: left;
+    margin: 0 0 4px;
     font-size: 1rem;
+  }
+
+  .timeline-card small {
+    grid-column: 2;
+    font-size: 0.85rem;
   }
 }
