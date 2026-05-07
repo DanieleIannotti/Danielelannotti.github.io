@@ -29,17 +29,6 @@ body {
   line-height: 1.65;
 }
 
-body::before {
-  content: "ψ   ⟨φ|ψ⟩   AdS/CFT   𝓗   S(ρ)   U(1)   ∂M   QIT   ∫";
-  position: fixed;
-  inset: auto 0 24px 0;
-  color: rgba(243, 239, 230, 0.045);
-  font-size: clamp(2rem, 6vw, 5rem);
-  white-space: nowrap;
-  z-index: -1;
-  pointer-events: none;
-}
-
 a {
   color: var(--accent);
   text-decoration: none;
