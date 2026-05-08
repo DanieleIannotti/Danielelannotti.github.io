@@ -63,6 +63,19 @@ nav {
   letter-spacing: -0.02em;
 }
 
+.logo-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-name img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+}
+
 .links {
   display: flex;
   flex-wrap: wrap;
