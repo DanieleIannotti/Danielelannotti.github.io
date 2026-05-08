@@ -417,19 +417,6 @@ section > p {
   box-shadow: 0 0 0 2px rgba(122, 62, 45, 0.22);
 }
 
-.aj-item:last-child .aj-dot::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 18px;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-left: 16px solid #7a3e2d;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-}
-
 .aj-logo {
   width: 116px;
   height: 116px;
