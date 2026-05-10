@@ -470,6 +470,41 @@ footer {
   color: var(--muted);
 }
 
+.art-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 48px;
+}
+
+.art-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.art-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.poem-section {
+  padding-top: 60px;
+}
+
+.poem {
+  max-width: 720px;
+}
+
+.poem h3 {
+  margin-bottom: 24px;
+}
+
+.poem p {
+  line-height: 1.9;
+  white-space: normal;
+}
+
 /* Mobile */
 
 @media (max-width: 860px) {
@@ -525,6 +560,10 @@ footer {
     width: 4px;
     height: auto;
     background: #7a3e2d;
+  }
+
+  .art-gallery {
+    grid-template-columns: 1fr;
   }
 
 }
